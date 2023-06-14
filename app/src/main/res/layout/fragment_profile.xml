@@ -9,12 +9,11 @@
     android:gravity="center_horizontal"
     >
 
-
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/iv_profile_image"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/my_photo"
+        android:src="@drawable/ic_person"
         app:shapeAppearanceOverlay="@style/RoundedImage"
         android:foregroundGravity="center"
         android:scaleType="centerCrop"
