@@ -37,6 +37,5 @@ class OnBoardingAdapter(private val onClick : () -> Unit) : Adapter<OnBoardingAd
                 onClick()
             }
         }
-
     }
 }
