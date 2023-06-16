@@ -21,13 +21,22 @@ class Pref(private val context : Context) {
     }
 
     fun getName() : String?{
-        return pref.getString(USER_NAME, null)
+        return pref.getString(USER_NAME, "").toString()
+    }
+
+    fun saveImage(image : String){
+        pref.edit().putString(USER_IMAGE, image).apply()
+    }
+
+    fun getImage() : String{
+        return pref.getString(USER_IMAGE, "").toString()
     }
 
     companion object {
         const val PREF_NAME = "task.pref"
         const val SEEN_KEY = "user_key"
         const val USER_NAME = "user_name"
+        const val USER_IMAGE = "user_image"
     }
 
 }

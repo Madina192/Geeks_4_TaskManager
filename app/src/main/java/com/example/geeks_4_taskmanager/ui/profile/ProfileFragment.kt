@@ -31,7 +31,6 @@ class ProfileFragment : Fragment() {
             pref.saveUserName(binding.etName.text.toString())
         }
 
-
     }
 
 }
