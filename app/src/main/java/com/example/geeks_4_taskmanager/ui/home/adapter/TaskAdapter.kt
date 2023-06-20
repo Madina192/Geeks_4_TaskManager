@@ -13,8 +13,9 @@ class TaskAdapter : Adapter<TaskAdapter.TaskViewHolder>() {
     private val list = arrayListOf<Task>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setTask(task: Task){
-        list.add(0, task)
+    fun setTasks(tasks: List<Task>){
+        list.clear()
+        list.addAll(tasks)
         notifyDataSetChanged()
     }
 

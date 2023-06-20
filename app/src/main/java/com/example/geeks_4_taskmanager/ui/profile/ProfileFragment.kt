@@ -35,7 +35,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun saveUserImage() {
-        Glide.with(binding.ivProfileImage).load(pref.getImage()).apply(RequestOptions.circleCropTransform()).into(binding.ivProfileImage)
+        Glide.with(binding.ivProfileImage).load(pref.getImage()).into(binding.ivProfileImage)
         binding.ivProfileImage.setOnClickListener{
             chooseImageContract.launch("image/*")
         }
