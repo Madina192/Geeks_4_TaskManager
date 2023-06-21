@@ -13,7 +13,6 @@ import com.example.geeks_4_taskmanager.databinding.FragmentHomeBinding
 import com.example.geeks_4_taskmanager.model.Task
 import com.example.geeks_4_taskmanager.ui.home.adapter.TaskAdapter
 
-
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
