@@ -7,7 +7,7 @@ import java.io.Serializable
 @Entity(tableName = "tasks")
 data class Task(
     @PrimaryKey(autoGenerate = true)
-    val id : Int? = null,
-    val title: String ?= null,
-    val desc : String ?=null
+    val id: Int? = null,
+    val title: String? = null,
+    val desc: String? = null
 ) : Serializable

@@ -12,9 +12,9 @@ import com.example.geeks_4_taskmanager.ui.onboarding.adapter.OnBoardingAdapter
 
 class OnBoardingFragment : Fragment() {
 
-    private lateinit var binding : FragmentOnBoardingBinding
-    private val adapter = OnBoardingAdapter(this :: onClick)
-    private val pref : Pref by lazy {
+    private lateinit var binding: FragmentOnBoardingBinding
+    private val adapter = OnBoardingAdapter(this::onClick)
+    private val pref: Pref by lazy {
         Pref(requireContext())
     }
 

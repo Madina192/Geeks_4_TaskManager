@@ -13,9 +13,9 @@ import com.example.geeks_4_taskmanager.databinding.FragmentProfileBinding
 
 
 class ProfileFragment : Fragment() {
-    private lateinit var binding : FragmentProfileBinding
+    private lateinit var binding: FragmentProfileBinding
 
-    private val pref : Pref by lazy {
+    private val pref: Pref by lazy {
         Pref(this.requireContext())
     }
 
@@ -30,27 +30,29 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        saveUserName()
-        saveUserImage()
+        initImage()
+        initName()
     }
 
-    private fun saveUserImage() {
+    private fun initName() {
         Glide.with(binding.ivProfileImage).load(pref.getImage()).into(binding.ivProfileImage)
-        binding.ivProfileImage.setOnClickListener{
+        binding.ivProfileImage.setOnClickListener {
             chooseImageContract.launch("image/*")
         }
     }
 
-    private val chooseImageContract = registerForActivityResult(ActivityResultContracts.GetContent()) { image ->
-        if (image != null) {
-            pref.saveImage(image.toString())
-            Glide.with(requireContext()).load(image).apply(RequestOptions.circleCropTransform()).into(binding.ivProfileImage)
+    private val chooseImageContract =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { image ->
+            if (image != null) {
+                pref.saveImage(image.toString())
+                Glide.with(requireContext()).load(image).apply(RequestOptions.circleCropTransform())
+                    .into(binding.ivProfileImage)
+            }
         }
-    }
 
-    private fun saveUserName(){
+    private fun initImage() {
         binding.etName.setText(pref.getName())
-        binding.btnSaveUserName.setOnClickListener{
+        binding.btnSaveUserName.setOnClickListener {
             pref.saveUserName(binding.etName.text.toString())
         }
     }

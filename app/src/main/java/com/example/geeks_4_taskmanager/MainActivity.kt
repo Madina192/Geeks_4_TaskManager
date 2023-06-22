@@ -15,9 +15,9 @@ import com.example.geeks_4_taskmanager.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var navView : BottomNavigationView
-    private lateinit var navController : NavController
-    private val pref : Pref by lazy {
+    private lateinit var navView: BottomNavigationView
+    private lateinit var navController: NavController
+    private val pref: Pref by lazy {
         Pref(this)
     }
 
@@ -30,28 +30,29 @@ class MainActivity : AppCompatActivity() {
         navView = binding.navView
         navController = findNavController(R.id.nav_host_fragment_activity_main)
 
-        navigateToOnBoarding()
+        if (!pref.isUserSeen()) {
+            navController.navigate(R.id.onBoardingFragment)
+        }
+
         setAppBar()
         setBottomNavVisibility()
     }
 
-    private fun setAppBar(){
+    private fun setAppBar() {
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.taskFragment, R.id.navigation_profile
+                R.id.navigation_home,
+                R.id.navigation_dashboard,
+                R.id.navigation_notifications,
+                R.id.taskFragment,
+                R.id.navigation_profile
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
-    private fun navigateToOnBoarding(){
-        if(!pref.isUserSeen()){
-            navController.navigate(R.id.onBoardingFragment)
-        }
-    }
-
-    private fun setBottomNavVisibility(){
+    private fun setBottomNavVisibility() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.onBoardingFragment) {
                 navView.isVisible = false

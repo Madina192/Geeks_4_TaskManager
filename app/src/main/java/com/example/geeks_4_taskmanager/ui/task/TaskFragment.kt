@@ -11,7 +11,7 @@ import com.example.geeks_4_taskmanager.databinding.FragmentTaskBinding
 import com.example.geeks_4_taskmanager.model.Task
 
 class TaskFragment : Fragment() {
-    private lateinit var binding : FragmentTaskBinding
+    private lateinit var binding: FragmentTaskBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,7 +23,7 @@ class TaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnSave.setOnClickListener{
+        binding.btnSave.setOnClickListener {
             onSave()
         }
     }

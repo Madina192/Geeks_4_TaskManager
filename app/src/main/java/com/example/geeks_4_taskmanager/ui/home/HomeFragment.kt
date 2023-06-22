@@ -32,33 +32,33 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        insertData()
+        addTasks()
         navigateToTaskFragment()
 
         binding.recyclerView.adapter = adapter
     }
 
-    private fun navigateToTaskFragment(){
-        binding.fab.setOnClickListener{
+    private fun navigateToTaskFragment() {
+        binding.fab.setOnClickListener {
             findNavController().navigate(R.id.taskFragment)
         }
     }
 
-    private fun insertData(){
+    private fun addTasks() {
         val list = App.db.taskDao().getAll()
         adapter.setTasks(list)
     }
 
-    private fun onLongClick(task : Task) {
+    private fun onLongClick(task: Task) {
         val alertDialogDelete = AlertDialog.Builder(requireContext())
-        alertDialogDelete.setMessage("Are you sure to delete this task?")
+        alertDialogDelete.setMessage(getString(R.string.delete_message))
 
-        alertDialogDelete.setPositiveButton("Yes") { _, _ ->
+        alertDialogDelete.setPositiveButton(getString(R.string.yes)) { _, _ ->
             App.db.taskDao().delete(task)
-            insertData()
+            addTasks()
         }
 
-        alertDialogDelete.setNegativeButton("No") { dialog, _ ->
+        alertDialogDelete.setNegativeButton(getString(R.string.no)) { dialog, _ ->
             dialog?.cancel()
         }
 

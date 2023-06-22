@@ -3,33 +3,33 @@ package com.example.geeks_4_taskmanager.data.local
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 
-class Pref(private val context : Context) {
+class Pref(private val context: Context) {
 
     private val pref by lazy {
         context.getSharedPreferences(PREF_NAME, MODE_PRIVATE)
     }
 
-    fun isUserSeen() : Boolean {
+    fun isUserSeen(): Boolean {
         return pref.getBoolean(SEEN_KEY, false)
     }
 
-    fun saveSeen(){
+    fun saveSeen() {
         pref.edit().putBoolean(SEEN_KEY, true).apply()
     }
 
-    fun saveUserName(name : String){
+    fun saveUserName(name: String) {
         pref.edit().putString(USER_NAME, name).apply()
     }
 
-    fun getName() : String?{
-        return pref.getString(USER_NAME, "").toString()
+    fun getName(): String? {
+        return pref.getString(USER_NAME, "")
     }
 
-    fun saveImage(image : String){
+    fun saveImage(image: String) {
         pref.edit().putString(USER_IMAGE, image).apply()
     }
 
-    fun getImage() : String{
+    fun getImage(): String {
         return pref.getString(USER_IMAGE, "").toString()
     }
 
