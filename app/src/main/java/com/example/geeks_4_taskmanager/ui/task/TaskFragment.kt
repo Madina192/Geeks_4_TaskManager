@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.geeks_4_taskmanager.App
+import com.example.geeks_4_taskmanager.R
 import com.example.geeks_4_taskmanager.databinding.FragmentTaskBinding
 import com.example.geeks_4_taskmanager.model.Task
 
 class TaskFragment : Fragment() {
     private lateinit var binding: FragmentTaskBinding
+    lateinit var task : Task
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,6 +28,19 @@ class TaskFragment : Fragment() {
         binding.btnSave.setOnClickListener {
             onSave()
         }
+
+        arguments?.let {
+
+        }
+        task = arguments?.getSerializable("task") as Task
+        if(task != null) {
+            binding.etTitle.setText(task.title)
+            binding.etDescr.setText(task.desc)
+            binding.btnSave.text = getString(R.string.update)
+        } else {
+            binding.btnSave.text = getString(R.string.save)
+        }
+
     }
 
     private fun onSave() {
@@ -33,6 +48,11 @@ class TaskFragment : Fragment() {
             title = binding.etTitle.text.toString(),
             desc = binding.etDescr.text.toString()
         )
+
+        if(task != null){
+
+        }
+
         App.db.taskDao().insert(data)
         findNavController().navigateUp()
     }

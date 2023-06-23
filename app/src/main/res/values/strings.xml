@@ -16,4 +16,6 @@
     <string name="title">Title</string>
     <string name="get_started">get started</string>
     <string name="profile_title">Profile</string>
+    <string name="edit">edit</string>
+    <string name="update">update\n</string>
 </resources>

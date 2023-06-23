@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.geeks_4_taskmanager.App
@@ -18,7 +19,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val adapter = TaskAdapter(this::onLongClick)
+    private val adapter = TaskAdapter(this::onLongClick, this::onClick)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,8 +62,12 @@ class HomeFragment : Fragment() {
         alertDialogDelete.setNegativeButton(getString(R.string.no)) { dialog, _ ->
             dialog?.cancel()
         }
-
         alertDialogDelete.create().show()
+    }
+
+    private fun onClick(task: Task) {
+        val action =
+        findNavController().navigate(R.id.taskFragment, bundleOf("task" to task))
     }
 
     override fun onDestroyView() {
