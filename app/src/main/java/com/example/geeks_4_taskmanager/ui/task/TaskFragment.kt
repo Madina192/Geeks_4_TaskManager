@@ -13,7 +13,7 @@ import com.example.geeks_4_taskmanager.model.Task
 
 class TaskFragment : Fragment() {
     private lateinit var binding: FragmentTaskBinding
-    lateinit var task : Task
+    private var task : Task? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,8 +34,8 @@ class TaskFragment : Fragment() {
         }
         task = arguments?.getSerializable("task") as Task
         if(task != null) {
-            binding.etTitle.setText(task.title)
-            binding.etDescr.setText(task.desc)
+            binding.etTitle.setText(task!!.title)
+            binding.etDescr.setText(task!!.desc)
             binding.btnSave.text = getString(R.string.update)
         } else {
             binding.btnSave.text = getString(R.string.save)
@@ -50,7 +50,11 @@ class TaskFragment : Fragment() {
         )
 
         if(task != null){
-
+            task!!.title = data.title
+            task!!.desc = data.desc
+            App.db.taskDao().update(task!!)
+        } else{
+            App.db.taskDao().insert(task!!)
         }
 
         App.db.taskDao().insert(data)
