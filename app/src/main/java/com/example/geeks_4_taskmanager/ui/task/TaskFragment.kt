@@ -13,7 +13,8 @@ import com.example.geeks_4_taskmanager.model.Task
 
 class TaskFragment : Fragment() {
     private lateinit var binding: FragmentTaskBinding
-    private var task : Task? = null
+    private var task: Task? = null
+    private lateinit var data: Task
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,39 +26,47 @@ class TaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnSave.setOnClickListener {
-            onSave()
+        if (arguments != null) {
+            task = requireArguments().getSerializable("task") as Task
         }
 
-        arguments?.let {
+        fillEditTexts()
+        buttonHandleClick()
+    }
 
-        }
-        task = arguments?.getSerializable("task") as Task
-        if(task != null) {
+    private fun fillEditTexts() {
+        if (task != null) {
             binding.etTitle.setText(task!!.title)
             binding.etDescr.setText(task!!.desc)
             binding.btnSave.text = getString(R.string.update)
         } else {
             binding.btnSave.text = getString(R.string.save)
         }
-
     }
 
-    private fun onSave() {
-        val data = Task(
-            title = binding.etTitle.text.toString(),
-            desc = binding.etDescr.text.toString()
-        )
-
-        if(task != null){
-            task!!.title = data.title
-            task!!.desc = data.desc
-            App.db.taskDao().update(task!!)
-        } else{
-            App.db.taskDao().insert(task!!)
+    private fun buttonHandleClick() {
+        binding.btnSave.setOnClickListener {
+            data = Task(
+                title = binding.etTitle.text.toString(),
+                desc = binding.etDescr.text.toString()
+            )
+            if (task != null) {
+                updateTask()
+            } else {
+                saveTask()
+            }
+            findNavController().navigateUp()
         }
+    }
 
-        App.db.taskDao().insert(data)
-        findNavController().navigateUp()
+    private fun saveTask() {
+        task = Task(data.id, data.title, data.desc)
+        App.db.taskDao().insert(task!!)
+    }
+
+    private fun updateTask() {
+        task!!.title = data.title
+        task!!.desc = data.desc
+        App.db.taskDao().update(task!!)
     }
 }

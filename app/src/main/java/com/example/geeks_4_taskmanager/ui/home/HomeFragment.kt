@@ -66,7 +66,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun onClick(task: Task) {
-        val action =
         findNavController().navigate(R.id.taskFragment, bundleOf("task" to task))
     }
 
