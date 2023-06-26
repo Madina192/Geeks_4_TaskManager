@@ -10,6 +10,7 @@ import com.example.geeks_4_taskmanager.App
 import com.example.geeks_4_taskmanager.R
 import com.example.geeks_4_taskmanager.databinding.FragmentTaskBinding
 import com.example.geeks_4_taskmanager.model.Task
+import com.example.geeks_4_taskmanager.ui.home.HomeFragment
 
 class TaskFragment : Fragment() {
     private lateinit var binding: FragmentTaskBinding
@@ -27,7 +28,7 @@ class TaskFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (arguments != null) {
-            task = requireArguments().getSerializable("task") as Task
+            task = requireArguments().getSerializable(HomeFragment.TASK_KEY) as Task
         }
 
         fillEditTexts()

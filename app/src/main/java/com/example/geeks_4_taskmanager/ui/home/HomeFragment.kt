@@ -66,11 +66,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun onClick(task: Task) {
-        findNavController().navigate(R.id.taskFragment, bundleOf("task" to task))
+        findNavController().navigate(R.id.taskFragment, bundleOf(TASK_KEY to task))
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val TASK_KEY = "task"
     }
 }

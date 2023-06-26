@@ -34,7 +34,7 @@ class ProfileFragment : Fragment() {
         initName()
     }
 
-    private fun initName() {
+    private fun initImage() {
         Glide.with(binding.ivProfileImage).load(pref.getImage()).into(binding.ivProfileImage)
         binding.ivProfileImage.setOnClickListener {
             chooseImageContract.launch("image/*")
@@ -45,12 +45,12 @@ class ProfileFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.GetContent()) { image ->
             if (image != null) {
                 pref.saveImage(image.toString())
-                Glide.with(requireContext()).load(image).apply(RequestOptions.circleCropTransform())
+                Glide.with(requireContext()).load(image)
                     .into(binding.ivProfileImage)
             }
         }
 
-    private fun initImage() {
+    private fun initName() {
         binding.etName.setText(pref.getName())
         binding.btnSaveUserName.setOnClickListener {
             pref.saveUserName(binding.etName.text.toString())
