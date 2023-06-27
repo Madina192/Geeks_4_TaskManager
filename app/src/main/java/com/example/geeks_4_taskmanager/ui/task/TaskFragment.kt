@@ -27,9 +27,7 @@ class TaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (arguments != null) {
-            task = requireArguments().getSerializable(HomeFragment.TASK_KEY) as Task
-        }
+        task = arguments?.getSerializable(HomeFragment.TASK_KEY) as Task?
 
         fillEditTexts()
         buttonHandleClick()
