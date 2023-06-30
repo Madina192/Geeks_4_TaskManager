@@ -18,4 +18,7 @@
     <string name="profile_title">Profile</string>
     <string name="edit">edit</string>
     <string name="update">update\n</string>
+    <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="send_code">send code</string>
+    <string name="enter_the_code">Enter the code</string>
 </resources>

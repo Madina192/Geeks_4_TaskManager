@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.geeks_4_taskmanager.R
 import com.example.geeks_4_taskmanager.data.local.Pref
 import com.example.geeks_4_taskmanager.databinding.FragmentOnBoardingBinding
 import com.example.geeks_4_taskmanager.ui.onboarding.adapter.OnBoardingAdapter
+import com.google.firebase.auth.FirebaseAuth
 
 class OnBoardingFragment : Fragment() {
 
@@ -35,7 +37,9 @@ class OnBoardingFragment : Fragment() {
 
     private fun onClick() {
         pref.saveSeen()
-        findNavController().navigateUp()
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            findNavController().navigate(R.id.navigation_auth)
+        }
     }
 
 }

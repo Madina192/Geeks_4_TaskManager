@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.nav_host_fragment_activity_main)
 
         if (!pref.isUserSeen()) {
-            navController.navigate(R.id.onBoardingFragment)
+            navController.navigate(R.id.action_to_onBoarding)
         }
 
         setAppBar()
@@ -50,11 +50,14 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
     }
 
     private fun setBottomNavVisibility() {
+        val fragmentsWithoutBottomNav = listOf(R.id.acceptFragment, R.id.phoneFragment, R.id.onBoardingFragment)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.onBoardingFragment) {
+            if (fragmentsWithoutBottomNav.contains(destination.id)) {
                 navView.isVisible = false
                 supportActionBar?.hide()
             } else {
