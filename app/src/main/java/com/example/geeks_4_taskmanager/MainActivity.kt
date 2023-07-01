@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navView: BottomNavigationView
     private lateinit var navController: NavController
+
     private val pref: Pref by lazy {
         Pref(this)
     }
