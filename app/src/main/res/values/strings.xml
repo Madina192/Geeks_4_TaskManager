@@ -21,4 +21,5 @@
     <string name="enter_your_phone_number">Enter your phone number</string>
     <string name="send_code">send code</string>
     <string name="enter_the_code">Enter the code</string>
+    <string name="verify">verify</string>
 </resources>

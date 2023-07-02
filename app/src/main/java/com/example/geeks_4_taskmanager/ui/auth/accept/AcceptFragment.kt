@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.geeks_4_taskmanager.R
 import com.example.geeks_4_taskmanager.databinding.FragmentAcceptBinding
 import com.example.geeks_4_taskmanager.ui.auth.phone.PhoneFragment
@@ -34,9 +35,11 @@ class AcceptFragment : Fragment() {
         val verId : String? = arguments?.getString(PhoneFragment.VER_KEY)
 
         binding.btnAccept.setOnClickListener{
-            val credential = PhoneAuthProvider.getCredential(verId.toString(), binding.etCode.toString())
+            val credential = PhoneAuthProvider.getCredential(verId.toString(), binding.verifyView.textEntered.toString())
             signInWithPhoneAuthCredential(credential)
         }
+
+        setPictureWithGlide()
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
@@ -45,5 +48,9 @@ class AcceptFragment : Fragment() {
             }.addOnFailureListener{
                 Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun setPictureWithGlide(){
+        Glide.with(binding.ivCode).load("https://cdni.iconscout.com/illustration/premium/thumb/login-page-4468581-3783954.png").into(binding.ivCode)
     }
 }

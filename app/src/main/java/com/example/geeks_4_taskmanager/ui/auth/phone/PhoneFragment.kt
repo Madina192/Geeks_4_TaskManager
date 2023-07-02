@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.geeks_4_taskmanager.R
 import com.example.geeks_4_taskmanager.databinding.FragmentPhoneBinding
 import com.google.firebase.FirebaseException
@@ -51,16 +52,25 @@ class PhoneFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        handleClickBtnSendCode()
+        setPictureWithGlide()
+    }
+
+    private fun handleClickBtnSendCode(){
         binding.btnSendCode.setOnClickListener{
+            val finalNumber = binding.inputCountryCode.prefixText.toString() + binding.etNumber.text.toString()
             val options = PhoneAuthOptions.newBuilder(auth)
-                .setPhoneNumber(binding.etPhone.text.toString()) // Phone number to verify
+                .setPhoneNumber(finalNumber) // Phone number to verify
                 .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
                 .setActivity(requireActivity()) // Activity (for callback binding)
                 .setCallbacks(callbacks) // OnVerificationStateChangedCallbacks
                 .build()
             PhoneAuthProvider.verifyPhoneNumber(options)
         }
+    }
 
+    private fun setPictureWithGlide(){
+        Glide.with(binding.ivLogin).load("https://img.freepik.com/free-vector/sign-page-abstract-concept-illustration_335657-2242.jpg?w=2000").into(binding.ivLogin)
     }
 
     companion object {
