@@ -58,7 +58,7 @@ class PhoneFragment : Fragment() {
 
     private fun handleClickBtnSendCode(){
         binding.btnSendCode.setOnClickListener{
-            val finalNumber = binding.inputCountryCode.prefixText.toString() + binding.etNumber.text.toString()
+            val finalNumber = "${binding.inputCountryCode.prefixText}${binding.etNumber.text}"
             val options = PhoneAuthOptions.newBuilder(auth)
                 .setPhoneNumber(finalNumber) // Phone number to verify
                 .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
