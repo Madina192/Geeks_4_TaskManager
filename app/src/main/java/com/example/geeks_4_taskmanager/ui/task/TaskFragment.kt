@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.geeks_4_taskmanager.App
 import com.example.geeks_4_taskmanager.R
@@ -49,12 +50,17 @@ class TaskFragment : Fragment() {
                 title = binding.etTitle.text.toString(),
                 desc = binding.etDescr.text.toString()
             )
-            if (task != null) {
-                updateTask()
+            if(binding.etTitle.text.toString().isNotEmpty() && binding.etDescr.text.toString().isNotEmpty()) {
+                if (task != null) {
+                    updateTask()
+                } else {
+                    saveTask()
+                }
+                findNavController().navigateUp()
             } else {
-                saveTask()
+                Toast.makeText(requireContext(), getString(R.string.you_can_t_save_an_empty_task), Toast.LENGTH_SHORT).show()
             }
-            findNavController().navigateUp()
+
         }
     }
 
